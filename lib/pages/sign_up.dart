@@ -61,26 +61,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
 
 
-  Widget _backButton() {
-    return InkWell(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(Icons.keyboard_arrow_left, color: Colors.black),
-            ),
-            Text('Back',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500))
-          ],
-        ),
-      ),
-    );
-  }
 
   Widget _entryField(String title, TextEditingController controller, {bool isPassword = false}) {
     return Container(
@@ -125,7 +105,7 @@ class _SignUpPageState extends State<SignUpPage> {
             gradient: LinearGradient(
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
-                colors: [Color.fromRGBO(108, 159, 206, 1), Colors.blueAccent])),
+                colors: [Colors.orangeAccent[100], Colors.orangeAccent[200]])),
         child: Text(
           'Register Now',
           style: TextStyle(fontSize: 20, color: Colors.white),
@@ -162,7 +142,7 @@ class _SignUpPageState extends State<SignUpPage> {
             Text(
               'Login',
               style: TextStyle(
-                  color: Colors.blue,
+                  color: Colors.orange,
                   fontSize: 13,
                   fontWeight: FontWeight.w600),
             ),
@@ -176,12 +156,17 @@ class _SignUpPageState extends State<SignUpPage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'Tide',
-          style: TextStyle(color: Color.fromRGBO(48, 79, 254, 1), fontSize: 30),
+          text: 'Step',
+          style: TextStyle(color: Colors.orange, fontSize: 30),
           children: [
             TextSpan(
-              text: 'Pool',
-              style: TextStyle(color: Color.fromRGBO(128, 214, 255, 1), fontSize: 30),
+              text: ' by ',
+              style: TextStyle(color: Colors.red, fontSize: 30),
+              children: [TextSpan(
+                text: 'Step',
+                style: TextStyle(color: Colors.orange, fontSize: 30),
+                )
+              ]
             ),
           ]),
     );
@@ -232,13 +217,12 @@ class _SignUpPageState extends State<SignUpPage> {
                       height: 20,
                     ),
                     _submitButton(context),
-                    SizedBox(height: height * .14),
+                    SizedBox(height: height * .01),
                     _loginAccountLabel(),
                   ],
                 ),
               ),
             ),
-            Positioned(top: 40, left: 0, child: _backButton()),
           ],
         ),
       ),
