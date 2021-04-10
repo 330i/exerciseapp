@@ -41,7 +41,7 @@ class ClipPainter extends CustomClipper<Path>{
 
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) {
-    
+
     return true;
   }
 
