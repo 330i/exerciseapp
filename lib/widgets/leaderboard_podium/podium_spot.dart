@@ -37,7 +37,11 @@ class PodiumSpot extends StatelessWidget {
         Pfp(imageUrl: pfpUrl, size: pfpSize),
         Container(
           margin: EdgeInsets.only(top: 5.0),
-          child: Text(username),
+          child: Text(username,
+              style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w900,
+                  fontFamily: "Nunito")),
         ),
         Container(
           margin: EdgeInsets.only(top: 5.0),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class UserMainStats extends StatelessWidget {
+  final String rank;
+  final String score;
+  UserMainStats({this.rank, this.score});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -12,7 +15,7 @@ class UserMainStats extends StatelessWidget {
         children: [
           Column(
             children: [
-              Text("1",
+              Text(rank,
                   style: TextStyle(
                       fontWeight: FontWeight.w800,
                       fontSize: 25.0,
@@ -31,7 +34,7 @@ class UserMainStats extends StatelessWidget {
           ),
           Column(
             children: [
-              Text("1000",
+              Text(score,
                   style: TextStyle(
                       fontWeight: FontWeight.w800,
                       fontSize: 25.0,
