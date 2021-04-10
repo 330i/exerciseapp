@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "666593380365",
+    "project_id": "exerciseapp-d13c6",
+    "storage_bucket": "exerciseapp-d13c6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666593380365:android:b9475c08602167af79ed44",
+        "android_client_info": {
+          "package_name": "org.crhs.exerciseapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666593380365-ahland1k1ff2u6nuc1tu003t95irria6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbVXBbTyvVrSj98Zs3acNDc2GmRpw_ZRQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "666593380365-ahland1k1ff2u6nuc1tu003t95irria6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
