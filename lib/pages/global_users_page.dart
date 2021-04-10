@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/top_bar/top_bar.dart';
-import '../widgets/leaderboard_podium.dart';
+import '../widgets/leaderboard_podium/leaderboard_podium.dart';
 import '../widgets/leaderboard_list/leaderboard_list.dart';
 
 class GlobalUsersPage extends StatefulWidget {
@@ -68,10 +68,20 @@ class _GlobalUsersPageState extends State<GlobalUsersPage> {
           Topbar(
             userPfp: 'https://i.imgur.com/AtjuEkK.png',
           ),
-          LeaderboardPodium(leaderboard.sublist(0, 3)),
           Expanded(
-            child: LeaderboardList(leaderboard.sublist(0)),
-          )
+              child: Stack(
+            children: [
+              LeaderboardPodium(leaderboard.sublist(0, 3)),
+              Positioned(
+                  width: MediaQuery.of(context).size.width,
+                  height: 510.0,
+                  bottom: 0,
+                  child: Container(
+                    decoration: BoxDecoration(color: Colors.orangeAccent),
+                    child: LeaderboardList(leaderboard.sublist(0)),
+                  ))
+            ],
+          ))
         ],
       ),
     ));
