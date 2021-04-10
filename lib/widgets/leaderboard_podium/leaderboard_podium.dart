@@ -20,7 +20,7 @@ class LeaderboardPodium extends StatelessWidget {
     return Container(
         width: MediaQuery.of(context).size.width,
         color: Colors.orangeAccent,
-        height: 250.0,
+        height: 355.0,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -33,7 +33,7 @@ class LeaderboardPodium extends StatelessWidget {
                   rank: 2)
             ]),
             Container(
-                margin: EdgeInsets.only(top: 25.0),
+                margin: EdgeInsets.only(top: 60.0),
                 child: _podiumSpotBuilder(
                     pfpSize: 80.0,
                     pfpUrl: topThree[0]['pfp'],
