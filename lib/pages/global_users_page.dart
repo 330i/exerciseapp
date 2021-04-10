@@ -12,19 +12,19 @@ class _GlobalUsersPageState extends State<GlobalUsersPage> {
   var leaderboard = [
     {
       "rank": 1,
-      "pfp": "https://uifaces.co/our-content/donated/gPZwCbdS.jpg",
+      "pfp": "https://i.imgur.com/AtjuEkK.png",
       "username": "Bob",
       "xp": 1000
     },
     {
       "rank": 2,
-      "pfp": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Pierre-Person.jpg",
+      "pfp": "https://i.imgur.com/AtjuEkK.png",
       "username": "Joe",
       "xp": 999
     },
     {
       "rank": 3,
-      "pfp": "https://i.pinimg.com/originals/ae/ec/c2/aeecc22a67dac7987a80ac0724658493.jpg",
+      "pfp": "https://i.imgur.com/AtjuEkK.png",
       "username": "George",
       "xp": 998
     },
@@ -34,21 +34,43 @@ class _GlobalUsersPageState extends State<GlobalUsersPage> {
       "username": "Jack",
       "xp": 997
     },
+    {
+      "rank": 5,
+      "pfp": "https://i.imgur.com/AtjuEkK.png",
+      "username": "Jack",
+      "xp": 997
+    },
+    {
+      "rank": 6,
+      "pfp": "https://i.imgur.com/AtjuEkK.png",
+      "username": "Jack",
+      "xp": 997
+    },
+    {
+      "rank": 7,
+      "pfp": "https://i.imgur.com/AtjuEkK.png",
+      "username": "Jack",
+      "xp": 997
+    },
+    {
+      "rank": 8,
+      "pfp": "https://i.imgur.com/AtjuEkK.png",
+      "username": "Jack",
+      "xp": 997
+    },
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
       child: Column(
         children: [
           Topbar(
             userPfp: 'https://i.imgur.com/AtjuEkK.png',
           ),
-          LeaderboardPodium(leaderboard.sublist(0,3)),
+          LeaderboardPodium(leaderboard.sublist(0, 3)),
           Expanded(
-            child: LeaderboardList(leaderboard.sublist(4)),
+            child: LeaderboardList(leaderboard.sublist(0)),
           )
         ],
       ),
