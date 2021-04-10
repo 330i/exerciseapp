@@ -6,9 +6,9 @@ class PodiumSpot extends StatelessWidget {
   final String pfpUrl;
   final double pfpSize;
   final String username;
-  final String xp;
+  final String score;
   final int rank;
-  PodiumSpot({this.pfpUrl, this.pfpSize, this.username, this.xp, this.rank});
+  PodiumSpot({this.pfpUrl, this.pfpSize, this.username, this.score, this.rank});
 
   Widget _crownBuilder(int rank) {
     switch (rank) {
@@ -46,7 +46,7 @@ class PodiumSpot extends StatelessWidget {
               borderRadius: BorderRadius.circular(20.0),
               border: Border.all(width: 5.0, color: Colors.white)),
           alignment: Alignment.center,
-          child: Text(xp),
+          child: Text(score),
         )
       ],
     ));

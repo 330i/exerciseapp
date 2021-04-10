@@ -38,7 +38,7 @@ class LeaderboardSlot extends StatelessWidget {
           Spacer(),
           Container(
             margin: EdgeInsets.only(right: 25.0),
-            child: Text(slot['xp'].toString(),
+            child: Text(slot['score'].toString(),
                 style: TextStyle(
                     fontSize: 17.0,
                     fontFamily: "Nunito",
