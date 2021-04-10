@@ -15,7 +15,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
     'photo': "https://i.imgur.com/AtjuEkK.png",
     "username": "Bob",
     "score": 1001,
-    "mile": "13:00",
+    "mile": 1545,
     "pushup": 50,
     "crunch": 50,
   };
@@ -34,7 +34,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     UserStatsBox(
-                      stat: user["mile"].toString(),
+                      stat: "${((user['mile'] as int) ~/ 60).toString()}:${((user['mile'] as int) % 60).toString()}",
                       statType: 'Mile Time',
                     ),
                     UserStatsBox(
