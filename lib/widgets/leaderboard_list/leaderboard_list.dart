@@ -8,12 +8,21 @@ class LeaderboardList extends StatelessWidget {
   Widget _buildSlot(Map slot) {
     return LeaderboardSlot(slot);
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-            children:
-                leaderboard.map((Map slot) => _buildSlot(slot))));
+      decoration: BoxDecoration(color:Colors.green, borderRadius: BorderRadius.only(topLeft: Radius.circular(50.0),topRight: Radius.circular(50.0))),
+      child: Padding(
+        padding: EdgeInsets.only(top: 20.0),
+        child: Container(
+          child: ListView(
+            scrollDirection: Axis.vertical,
+            padding: EdgeInsets.zero,
+            children: [...leaderboard.map((Map slot) => _buildSlot(slot))],
+          ),
+        ),
+      ),
+    );
   }
 }
