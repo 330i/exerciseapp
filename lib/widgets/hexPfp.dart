@@ -12,22 +12,31 @@ class HexPfp extends StatelessWidget {
       width: size,
       child: ClipPolygon(
         sides: 6,
-        child:Container(
-          color: Colors.white,
-        padding:EdgeInsets.all(4.0),
-        child: ClipPolygon(
-          sides: 6,
-          borderRadius: 4.0,
-          child: Container(
-            height: size,
-            width: size,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                image: DecorationImage(
-                    fit: BoxFit.fill, image: NetworkImage(imageUrl))),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
+                colors: [
+                  Color(0xffff6174),
+                  Color(0xfffd795e),
+                  Color(0xfffc9544)
+                ]),
+          ),
+          padding: EdgeInsets.all(4.0),
+          child: ClipPolygon(
+            sides: 6,
+            borderRadius: 4.0,
+            child: Container(
+              height: size,
+              width: size,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      fit: BoxFit.fill, image: NetworkImage(imageUrl))),
+            ),
           ),
         ),
-      ),),
+      ),
     );
   }
 }
