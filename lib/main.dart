@@ -1,6 +1,5 @@
-import 'package:exerciseapp/pages/login_page.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'pages/global_users_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,27 +10,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: FutureBuilder(
-        future: Firebase.initializeApp(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            print(snapshot.error.toString());
-            return Container(
-              color: Colors.red,
-            );
-          }
-
-          // Once complete, show your application
-          if (snapshot.connectionState == ConnectionState.done) {
-            return LoginPage();
-          }
-
-          // Otherwise, show something whilst waiting for initialization to complete
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        },
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.red
       ),
+      home: GlobalUsersPage(),
+      // home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
+
+
