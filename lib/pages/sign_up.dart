@@ -1,12 +1,11 @@
-import 'dart:convert';
-import 'dart:io';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:exerciseapp/model/user.dart';
 import 'package:exerciseapp/pages/place_holder.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:exerciseapp/widgets/bezier_container.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:validators/sanitizers.dart';
 import 'login_page.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'place_holder.dart';
 
 import 'package:http/http.dart' as http;
@@ -28,54 +27,29 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController mileTime = new TextEditingController();
   TextEditingController pushups = new TextEditingController();
   TextEditingController crunches = new TextEditingController();
+  String url;
 
 
   @override
   void initState(){
 
     super.initState();
-    getIP();
-  }
-
-
-  String baseaddr;
-  Future getIP()async{
-
-    try {
-      final Directory directory = await getApplicationDocumentsDirectory();
-      final File file = File('${directory.path}/ip.txt');
-      String temp = await file.readAsString();
-      setState(() {
-        baseaddr = temp;
-      });
-      print(temp);
-    } catch (e) {
-      print("Couldn't read file");
-    }
   }
 
   setUser(BuildContext context) async{
-    print("changing username");
-    final Directory directory = await getApplicationDocumentsDirectory();
-    final File file = File('${directory.path}/user.txt');
-    await file.writeAsString(username.text.toString());
+    FirebaseAuth.instance.createUserWithEmailAndPassword(email: email.text, password: password.text).then((currentUser) {
+      FirebaseFirestore.instance.collection('users').doc(currentUser.user.uid).set(Athlete(
+        username: username.text,
+        email: email.text,
+        uid: currentUser.user.uid,
+        url: url,
+        rank: 1,
+        mile: toDouble(mileTime.text),
+        pushup: toInt(pushups.text),
+        crunch: toInt(crunches.text),
+      ).toJson());
+    });
 
-    var tmp = {
-      'mileTime':mileTime.text.toString(),
-      'pushups':int.parse(pushups.text.toString()),
-      'crunches':int.parse(crunches.text.toString()),
-      'email':email.text.toString()
-    };
-
-    try {
-      print(baseaddr+"users/add/1/"+username.text.toString()+"/"+password.text.toString()+"/"+0.toString()+"/"+0.toString()+"/"+json.encode(tmp).toString()+"/"+json.encode({}).toString());
-      //var h = await http.get(baseaddr+"users/add/1/"+username.text.toString()+"/"+password.text.toString()+"/"+0.toString()+"/"+0.toString()+"/"+RequestConvert.convertTo(json.encode(tmp).toString()+"/"+json.encode({}).toString()+"/"));
-      //print(h.body.toString());
-    }
-    catch (e) {
-      print('NOoOOOOoOOOOOoOOO');
-      print(e.toString());
-    }
 
 
 
@@ -134,7 +108,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Widget _submitButton(BuildContext context) {
-    return FlatButton(
+    return TextButton(
       child: Container(
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.symmetric(vertical: 15),
@@ -219,7 +193,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Column(
       children: <Widget>[
         _entryField("Username", username),
-        _entryField("Email id", email),
+        _entryField("Email", email),
         _entryField("Password", password, isPassword: true),
         _entryField("Mile Time", mileTime),
         _entryField("Pushups in 1 minute", pushups),

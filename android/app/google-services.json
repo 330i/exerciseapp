@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:666593380365:android:b9475c08602167af79ed44",
+        "mobilesdk_app_id": "1:666593380365:android:ccef7bde4dfc9d3079ed44",
         "android_client_info": {
-          "package_name": "org.crhs.exerciseapp"
+          "package_name": "org.crhsidea.exerciseapp"
         }
       },
       "oauth_client": [
