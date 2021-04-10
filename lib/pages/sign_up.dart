@@ -1,14 +1,15 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exerciseapp/model/user.dart';
 import 'package:exerciseapp/pages/place_holder.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:exerciseapp/widgets/bezier_container.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:validators/sanitizers.dart';
 import 'login_page.dart';
 import 'place_holder.dart';
-
-import 'package:http/http.dart' as http;
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);
@@ -28,6 +29,8 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController pushups = new TextEditingController();
   TextEditingController crunches = new TextEditingController();
   String url;
+  File _profileimg;
+  FirebaseStorage _storage = FirebaseStorage.instance;
 
 
   @override
@@ -38,11 +41,12 @@ class _SignUpPageState extends State<SignUpPage> {
 
   setUser(BuildContext context) async{
     FirebaseAuth.instance.createUserWithEmailAndPassword(email: email.text, password: password.text).then((currentUser) {
+      FirebaseStorage.instance.ref().child('profilepicture').child('${currentUser.user.uid}').putFile(_profileimg);
       FirebaseFirestore.instance.collection('users').doc(currentUser.user.uid).set(Athlete(
         username: username.text,
         email: email.text,
         uid: currentUser.user.uid,
-        url: url,
+        url: _profileimg==null?'profilepicture/default.jpg':'profilepicture/${currentUser.user.uid}',
         rank: 1,
         mile: toDouble(mileTime.text),
         pushup: toInt(pushups.text),
@@ -56,29 +60,6 @@ class _SignUpPageState extends State<SignUpPage> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => PlaceHolder()),
-    );
-  }
-
-
-
-  Widget _backButton() {
-    return InkWell(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(Icons.keyboard_arrow_left, color: Colors.black),
-            ),
-            Text('Back',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500))
-          ],
-        ),
-      ),
     );
   }
 
@@ -172,18 +153,112 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _title() {
-    return RichText(
-      textAlign: TextAlign.center,
-      text: TextSpan(
-          text: 'Tide',
-          style: TextStyle(color: Color.fromRGBO(48, 79, 254, 1), fontSize: 30),
-          children: [
-            TextSpan(
-              text: 'Pool',
-              style: TextStyle(color: Color.fromRGBO(128, 214, 255, 1), fontSize: 30),
+  Future<void> _pickImage(ImageSource source) async {
+    PickedFile selected = await ImagePicker().getImage(source: source);
+    setState(() {
+      _profileimg = File(selected.path);
+    });
+  }
+
+  Widget _picture() {
+    return Container(
+      height: 150,
+      width: 150,
+      child: ClipRRect(
+        child: GestureDetector(
+          child: Container(
+            color: Colors.orangeAccent,
+            child: _profileimg==null?
+            Icon(Icons.add_a_photo_outlined, size: 50, color: Colors.white,):
+            Image.file(
+              _profileimg,
+              height: 150,
+              width: 150,
+              fit: BoxFit.cover,
             ),
-          ]),
+          ),
+          onTap: () {
+            showDialog<void>(
+              context: context,
+              barrierDismissible: true,
+              // false = user must tap button, true = tap outside dialog
+              builder: (BuildContext dialogContext) {
+                return AlertDialog(
+                  content: Container(
+                    height: 110,
+                    child: Row(
+                      children: [
+                        Spacer(
+                          flex: 1,
+                        ),
+                        Container(
+                          width: 100,
+                          child: TextButton(
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.camera,
+                                  size: 70,
+                                  color: Colors.grey,
+                                ),
+                                Text(
+                                  'Camera',
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                  ),
+                                )
+                              ],
+                            ),
+                            onPressed: () {
+                              _pickImage(ImageSource.camera);
+                            },
+                            style: ButtonStyle(
+                              overlayColor: MaterialStateColor.resolveWith((states) => Colors.white),
+                            ),
+                          ),
+                        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                        Container(
+                          width: 100,
+                          child: TextButton(
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.image,
+                                  size: 70,
+                                  color: Colors.grey,
+                                ),
+                                Text(
+                                  'Gallery',
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            onPressed: () {
+                              _pickImage(ImageSource.gallery);
+                            },
+                            style: ButtonStyle(
+                              overlayColor: MaterialStateColor.resolveWith((states) => Colors.white),
+                            ),
+                          ),
+                        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+        ),
+        borderRadius: BorderRadius.circular(75),
+      ),
     );
   }
 
@@ -208,38 +283,40 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       body: Container(
         height: height,
-        child: Stack(
-          children: <Widget>[
-            Positioned(
-              top: -MediaQuery.of(context).size.height * .15,
-              right: -MediaQuery.of(context).size.width * .4,
-              child: BezierContainer(),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(height: height * .2),
-                    _title(),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    _emailPasswordWidget(),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    _submitButton(context),
-                    SizedBox(height: height * .14),
-                    _loginAccountLabel(),
-                  ],
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(
+                  height: 70,
                 ),
-              ),
+                _picture(),
+                _profileimg==null?
+                Container():
+                TextButton(
+                  child: Text('Clear'),
+                  onPressed: () {
+                    setState(() {
+                      _profileimg = null;
+                    });
+                  },
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                _emailPasswordWidget(),
+                SizedBox(
+                  height: 20,
+                ),
+                _submitButton(context),
+                SizedBox(height: height * .14),
+                _loginAccountLabel(),
+              ],
             ),
-            Positioned(top: 40, left: 0, child: _backButton()),
-          ],
+          ),
         ),
       ),
     );
