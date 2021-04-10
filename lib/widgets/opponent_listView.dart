@@ -93,7 +93,7 @@ class OpponentsView extends StatelessWidget {
                               style: TextStyle(
                                 fontFamily: FitnessAppTheme.fontName,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                                fontSize: 18,
                                 letterSpacing: 0.2,
                                 color: FitnessAppTheme.white,
                               ),
@@ -107,11 +107,11 @@ class OpponentsView extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      opponentsListData.stats.join('\n'),
+                                      opponentsListData.mileTime.toString() +'\n' + opponentsListData.pushups.toString() +'\n' +opponentsListData.crunches.toString(),
                                       style: TextStyle(
                                         fontFamily: FitnessAppTheme.fontName,
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 10,
+                                        fontSize: 16,
                                         letterSpacing: 0.2,
                                         color: FitnessAppTheme.white,
                                       ),
