@@ -37,7 +37,7 @@ dependencies:
   validators: ^3.0.0
   image_picker: ^0.7.4
   image_cropper: ^1.4.0
-  curved_navigation_bar: ^0.3.3
+  curved_navigation_bar: ^0.3.7
   hexcolor: ^2.0.3
 
 dev_dependencies:
