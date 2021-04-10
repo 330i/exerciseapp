@@ -67,19 +67,13 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            // border: Border.all(width: 4.0, color: Colors.white),
-                            // borderRadius: BorderRadius.circular(100.0),
-                          ),
-                          child: HexPfp(imageUrl: user['photo'], size: 100.0),
-                        ),
+                        HexPfp(imageUrl: user['photo'], size: 125.0),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
                               margin: EdgeInsets.only(
-                                top: 8.0,
+                                top: 10.0,
                               ),
                               child: Text(
                                 user['username'],
