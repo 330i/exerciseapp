@@ -21,7 +21,6 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-
   flutter:
     sdk: flutter
 
@@ -38,6 +37,8 @@ dependencies:
   validators: ^3.0.0
   image_picker: ^0.7.4
   image_cropper: ^1.4.0
+  curved_navigation_bar: ^0.3.3
+  hexcolor: ^2.0.3
 
 dev_dependencies:
   flutter_test:
