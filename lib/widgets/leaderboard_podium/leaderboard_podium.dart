@@ -5,12 +5,12 @@ class LeaderboardPodium extends StatelessWidget {
   final List<Map> topThree;
   LeaderboardPodium(this.topThree);
 
-  Widget _podiumSpotBuilder({username, pfpSize, pfpUrl, xp, rank}) {
+  Widget _podiumSpotBuilder({username, pfpSize, pfpUrl, score, rank}) {
     return PodiumSpot(
       username: username,
       pfpSize: pfpSize,
       pfpUrl: pfpUrl,
-      xp: xp.toString(),
+      score: score.toString(),
       rank: rank,
     );
   }
@@ -19,7 +19,7 @@ class LeaderboardPodium extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         width: MediaQuery.of(context).size.width,
-        color: Colors.orangeAccent,
+        color: Color(0xffff9800),
         height: 355.0,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -29,7 +29,7 @@ class LeaderboardPodium extends StatelessWidget {
                   pfpSize: 60.0,
                   pfpUrl: topThree[1]['pfp'],
                   username: topThree[1]['username'],
-                  xp: topThree[1]['xp'],
+                  score: topThree[1]['score'],
                   rank: 2)
             ]),
             Container(
@@ -38,14 +38,14 @@ class LeaderboardPodium extends StatelessWidget {
                     pfpSize: 80.0,
                     pfpUrl: topThree[0]['pfp'],
                     username: topThree[0]['username'],
-                    xp: topThree[0]['xp'],
+                    score: topThree[0]['score'],
                     rank: 1)),
             Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               _podiumSpotBuilder(
                   pfpSize: 60.0,
                   pfpUrl: topThree[2]['pfp'],
                   username: topThree[2]['username'],
-                  xp: topThree[2]['xp'],
+                  score: topThree[2]['score'],
                   rank: 3)
             ])
           ],

@@ -13,49 +13,49 @@ class _GlobalUsersPageState extends State<GlobalUsersPage> {
       "rank": 1,
       "pfp": "https://i.imgur.com/AtjuEkK.png",
       "username": "Bob",
-      "xp": 1000
+      "score": 1000
     },
     {
       "rank": 2,
       "pfp": "https://i.imgur.com/AtjuEkK.png",
       "username": "Joe",
-      "xp": 999
+      "score": 999
     },
     {
       "rank": 3,
       "pfp": "https://i.imgur.com/AtjuEkK.png",
       "username": "George",
-      "xp": 998
+      "score": 998
     },
     {
       "rank": 4,
       "pfp": "https://i.imgur.com/AtjuEkK.png",
       "username": "Jack",
-      "xp": 997
+      "score": 997
     },
     {
       "rank": 5,
       "pfp": "https://i.imgur.com/AtjuEkK.png",
       "username": "Jack",
-      "xp": 997
+      "score": 997
     },
     {
       "rank": 6,
       "pfp": "https://i.imgur.com/AtjuEkK.png",
       "username": "Jack",
-      "xp": 997
+      "score": 997
     },
     {
       "rank": 7,
       "pfp": "https://i.imgur.com/AtjuEkK.png",
       "username": "Jack",
-      "xp": 997
+      "score": 997
     },
     {
       "rank": 8,
       "pfp": "https://i.imgur.com/AtjuEkK.png",
       "username": "Jack",
-      "xp": 997
+      "score": 997
     },
   ];
   @override
@@ -73,7 +73,7 @@ class _GlobalUsersPageState extends State<GlobalUsersPage> {
                   height: 490.0,
                   bottom: 10,
                   child: Container(
-                    decoration: BoxDecoration(color: Colors.orangeAccent),
+                    decoration: BoxDecoration(color: Color(0xffff9800)),
                     child: LeaderboardList(leaderboard.sublist(0)),
                   )),
             ],
