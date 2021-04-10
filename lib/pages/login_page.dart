@@ -1,11 +1,7 @@
-import 'dart:convert';
-import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'sign_up.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:exerciseapp/widgets/bezier_container.dart';
-import 'package:http/http.dart' as http;
 import 'place_holder.dart';
 
 class LoginPage extends StatefulWidget {
@@ -19,41 +15,21 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
-  TextEditingController username = new TextEditingController();
+  TextEditingController email = new TextEditingController();
   TextEditingController password = new TextEditingController();
 
-  String baseaddr ;
-
-  @override
-  void initState(){
-    super.initState();
-    getIP();
-  }
-
-  Future getIP()async{
-
-    try {
-      final Directory directory = await getApplicationDocumentsDirectory();
-      final File file = File('${directory.path}/ip.txt');
-      String temp = await file.readAsString();
-      setState(() {
-        baseaddr = temp;
-      });
-      print(temp);
-    } catch (e) {
-      print("Couldn't read file");
-    }
-  }
-
-
-  Future authenticate(BuildContext context) async{
-    var h = await http.get(baseaddr+"users/byname/"+username.text.toString());
-    if (1==1){
+  loginProcess() {
+    FirebaseAuth.instance.signInWithEmailAndPassword(email: email.text, password: password.text).whenComplete(() {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => PlaceHolder()),
       );
-    }
+    });
+  }
+
+  @override
+  void initState(){
+    super.initState();
   }
 
   Widget _backButton() {
@@ -103,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _submitButton(BuildContext context) {
-    return FlatButton(
+    return TextButton(
       child: Container(
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.symmetric(vertical: 15),
@@ -127,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
       onPressed: () {
-        authenticate(context);
+        loginProcess();
       },
     );
   }
@@ -183,7 +159,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _usernamePasswordWidget() {
     return Column(
       children: <Widget>[
-        _entryField("Username", username),
+        _entryField("Email", email),
         _entryField("Password", password, isPassword: true),
       ],
     );
