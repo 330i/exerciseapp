@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Competitions extends StatefulWidget {
@@ -12,15 +13,22 @@ class _CompetitionsState extends State<Competitions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orangeAccent,
-        body: Center(
+        body: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("lib/img/running.jpg"),
+                  colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.4), BlendMode.dstATop),
+                  fit: BoxFit.cover
+              ),
+          ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // == BUTTON ==
                 Container(
-                  height: 200,
-                  width: 200,
+                  height: 170,
+                  width: 170,
+                  margin: const EdgeInsets.only(top: 100.0),
                   child: ElevatedButton(
                       child: Center(child: Text('Find a Competition', style: TextStyle(fontWeight: FontWeight.bold))),
                       style: ElevatedButton.styleFrom(
@@ -47,16 +55,16 @@ class _CompetitionsState extends State<Competitions> {
                         offset: const Offset(
                           3.0,
                           3.0,
-                        ), //Offset
+                        ),
                         blurRadius: 5,
                         spreadRadius: 2,
-                      ), //BoxShadow
+                      ),
                       BoxShadow(
                         color: Colors.white,
                         offset: const Offset(0.0, 0.0),
                         blurRadius: 0.0,
                         spreadRadius: 0.0,
-                      ), //BoxShadow
+                      ),
                     ],),
                   child: CheckboxListTile(
                     activeColor: Colors.deepOrange,
@@ -74,7 +82,6 @@ class _CompetitionsState extends State<Competitions> {
                   ),
                 ),
 
-
                 // == UNRANKED ==
                 Container(
                   decoration: BoxDecoration(border: Border.all(color: Colors.black38),
@@ -85,16 +92,16 @@ class _CompetitionsState extends State<Competitions> {
                         offset: const Offset(
                           3.0,
                           3.0,
-                        ), //Offset
+                        ),
                         blurRadius: 5,
                         spreadRadius: 2,
-                      ), //BoxShadow
+                      ),
                       BoxShadow(
                         color: Colors.white,
                         offset: const Offset(0.0, 0.0),
                         blurRadius: 0.0,
                         spreadRadius: 0.0,
-                      ), //BoxShadow
+                      ),
                     ],),
                   child: CheckboxListTile(
                     activeColor: Colors.deepOrange,
@@ -111,79 +118,9 @@ class _CompetitionsState extends State<Competitions> {
 
                   ),
                 )
-
-
               ],
             )
         )
     );
   }
 }
-
-
-
-    /*
-                // == RANKED ==
-                Container(
-
-                ),
-
-                // == UNRANKED ==
-                Container(
-
-                )
-
-
-
-
-
-
-    return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          child: Center(child: Text('Find a Competition')),
-          // CENTER THIS
-          onPressed: () {
-            print('===Do Something===');
-          },
-          style: ElevatedButton.styleFrom(
-              shape: CircleBorder(),
-              primary: Colors.blue,
-              padding: EdgeInsets.only(right: 10, left: 10, top: 10, bottom: 10),
-              textStyle: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold)),
-        ),
-      ),
-    ); */
-
-
-/*class MyCheckboxes extends StatefulWidget {
-  @override
-  _MyCheckboxes createState() => _MyCheckboxes();
-}
-
-class _MyCheckboxes extends State<MyCheckboxes> {
-  @override
-  bool _isChecked = false;
-
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-          child: CheckboxListTile(
-            title: const Text('Ranked'),
-            value: _isChecked,
-            onChanged: (bool value) {
-              setState(() {
-                _isChecked = value;
-              });
-            },
-          ),
-        )
-      ],
-    );
-  }
-} */
-

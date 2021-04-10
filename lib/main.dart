@@ -1,6 +1,7 @@
 import 'package:exerciseapp/Competitions.dart';
 import 'package:flutter/material.dart';
 import 'Competitions.dart';
+import 'Results.dart';
 
 void main() {
   runApp(MyApp());
