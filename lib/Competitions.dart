@@ -30,10 +30,10 @@ class _CompetitionsState extends State<Competitions> {
                   width: 170,
                   margin: const EdgeInsets.only(top: 100.0),
                   child: ElevatedButton(
-                      child: Center(child: Text('Find a Competition', style: TextStyle(fontWeight: FontWeight.bold))),
+                      child: Center(child: Text('Find a Competition', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))),
                       style: ElevatedButton.styleFrom(
                         shape: CircleBorder(),
-                        primary: Colors.deepOrangeAccent,
+                        primary: (Colors.orangeAccent),
                         onPrimary: Colors.white,
                         shadowColor: Colors.black,
                         elevation: 10,
@@ -70,9 +70,10 @@ class _CompetitionsState extends State<Competitions> {
                         blurRadius: 0.0,
                         spreadRadius: 0.0,
                       ),
-                    ],),
+                    ],
+                  ),
                   child: CheckboxListTile(
-                    activeColor: Colors.deepOrange,
+                    activeColor: Colors.orangeAccent,
                     checkColor: Colors.white,
                     title: const Text('Ranked', style: TextStyle(fontWeight: FontWeight.bold)),
                     subtitle: const Text('A competitive event which will affect your ranking'),
@@ -85,6 +86,11 @@ class _CompetitionsState extends State<Competitions> {
                     },
 
                   ),
+                ),
+
+                // == SPACE ==
+                Container(
+                  height: 15,
                 ),
 
                 // == UNRANKED ==
@@ -109,7 +115,7 @@ class _CompetitionsState extends State<Competitions> {
                       ),
                     ],),
                   child: CheckboxListTile(
-                    activeColor: Colors.deepOrange,
+                    activeColor: Colors.orangeAccent,
                     checkColor: Colors.white,
                     title: const Text('Unranked', style: TextStyle(fontWeight: FontWeight.bold)),
                     subtitle: const Text('A casual event which will NOT affect your ranking'),
