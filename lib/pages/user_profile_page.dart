@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/pfp.dart';
 import '../widgets/user_stats_box.dart';
-import '../widgets/user_stats_circle.dart';
 import '../widgets/user_main_stats.dart';
 
 class UserProfilePage extends StatefulWidget {
