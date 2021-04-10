@@ -39,7 +39,7 @@ class _TournamentPageState extends State<TournamentPage> {
                     ),
                     _entryField("Submit a mile time", mileTime),
                     SizedBox(width: 30,),
-                    ElevatedButton.icon(onPressed: null, icon: Icon(Icons.add), label: Text(''))
+                    ElevatedButton.icon(onPressed: null, icon: Icon(Icons.add, color: Colors.black,), label: Text(''), style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.redAccent[200])))
                   ]),
                   Row(children: [
                     SizedBox(
@@ -47,7 +47,7 @@ class _TournamentPageState extends State<TournamentPage> {
                     ),
                     _entryField("Submit a pushup count", pushup),
                     SizedBox(width: 30,),
-                    ElevatedButton.icon(onPressed: null, icon: Icon(Icons.add), label: Text(''))
+                    ElevatedButton.icon(onPressed: null, icon: Icon(Icons.add, color: Colors.black,), label: Text(''), style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.redAccent[200])))
                   ]),
                   Row(children: [
                     SizedBox(
@@ -55,7 +55,7 @@ class _TournamentPageState extends State<TournamentPage> {
                     ),
                     _entryField("Submit a crunch count", crunches),
                     SizedBox(width: 30,),
-                    ElevatedButton.icon(onPressed: null, icon: Icon(Icons.add), label: Text(''))
+                    ElevatedButton.icon(onPressed: null, icon: Icon(Icons.add, color: Colors.black,), label: Text(''), style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.redAccent[200])))
                   ])
                 ],
               ),
