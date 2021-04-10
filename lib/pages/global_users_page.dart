@@ -11,49 +11,49 @@ class _GlobalUsersPageState extends State<GlobalUsersPage> {
   var leaderboard = [
     {
       "rank": 1,
-      "pfp": "https://i.imgur.com/AtjuEkK.png",
+      'photo': "https://i.imgur.com/AtjuEkK.png",
       "username": "Bob",
       "score": 1000
     },
     {
       "rank": 2,
-      "pfp": "https://i.imgur.com/AtjuEkK.png",
+      'photo': "https://i.imgur.com/AtjuEkK.png",
       "username": "Joe",
       "score": 999
     },
     {
       "rank": 3,
-      "pfp": "https://i.imgur.com/AtjuEkK.png",
+      'photo': "https://i.imgur.com/AtjuEkK.png",
       "username": "George",
       "score": 998
     },
     {
       "rank": 4,
-      "pfp": "https://i.imgur.com/AtjuEkK.png",
+      'photo': "https://i.imgur.com/AtjuEkK.png",
       "username": "Jack",
       "score": 997
     },
     {
       "rank": 5,
-      "pfp": "https://i.imgur.com/AtjuEkK.png",
+      'photo': "https://i.imgur.com/AtjuEkK.png",
       "username": "Jack",
       "score": 997
     },
     {
       "rank": 6,
-      "pfp": "https://i.imgur.com/AtjuEkK.png",
+      'photo': "https://i.imgur.com/AtjuEkK.png",
       "username": "Jack",
       "score": 997
     },
     {
       "rank": 7,
-      "pfp": "https://i.imgur.com/AtjuEkK.png",
+      'photo': "https://i.imgur.com/AtjuEkK.png",
       "username": "Jack",
       "score": 997
     },
     {
       "rank": 8,
-      "pfp": "https://i.imgur.com/AtjuEkK.png",
+      'photo': "https://i.imgur.com/AtjuEkK.png",
       "username": "Jack",
       "score": 997
     },

@@ -11,6 +11,7 @@ class LeaderboardSlot extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 80.0,
+      constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
       child: Row(
         children: <Widget>[
           Container(
@@ -25,7 +26,7 @@ class LeaderboardSlot extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(left: 15.0),
             child: Pfp(
-              imageUrl: slot['pfp'],
+              imageUrl: slot['photo'],
               size: 50.0,
             ),
           ),

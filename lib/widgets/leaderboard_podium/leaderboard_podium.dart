@@ -27,7 +27,7 @@ class LeaderboardPodium extends StatelessWidget {
             Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               _podiumSpotBuilder(
                   pfpSize: 60.0,
-                  pfpUrl: topThree[1]['pfp'],
+                  pfpUrl: topThree[1]['photo'],
                   username: topThree[1]['username'],
                   score: topThree[1]['score'],
                   rank: 2)
@@ -36,14 +36,14 @@ class LeaderboardPodium extends StatelessWidget {
                 margin: EdgeInsets.only(top: 60.0),
                 child: _podiumSpotBuilder(
                     pfpSize: 90.0,
-                    pfpUrl: topThree[0]['pfp'],
+                    pfpUrl: topThree[0]['photo'],
                     username: topThree[0]['username'],
                     score: topThree[0]['score'],
                     rank: 1)),
             Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               _podiumSpotBuilder(
                   pfpSize: 60.0,
-                  pfpUrl: topThree[2]['pfp'],
+                  pfpUrl: topThree[2]['photo'],
                   username: topThree[2]['username'],
                   score: topThree[2]['score'],
                   rank: 3)
