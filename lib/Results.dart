@@ -8,6 +8,27 @@ class Results extends StatefulWidget {
 class _ResultsState extends State<Results> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      backgroundColor: Colors.white,
+        body: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // == PLACEMENT ==
+              Container(
+
+              ),
+
+              // == ELO ==
+
+
+
+
+
+
+            ],
+        )
+      )
+    );
   }
 }

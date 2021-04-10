@@ -45,6 +45,11 @@ class _CompetitionsState extends State<Competitions> {
                   ),
                 ),
 
+                // == SPACE ==
+                Container(
+                  height: 150,
+                ),
+
                 // == RANKED ==
                 Container(
                   decoration: BoxDecoration(border: Border.all(color: Colors.black38),
