@@ -1,3 +1,4 @@
+import 'package:exerciseapp/widgets/bottom_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'sign_up.dart';
@@ -22,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
     FirebaseAuth.instance.signInWithEmailAndPassword(email: email.text, password: password.text).whenComplete(() {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => PlaceHolder()),
+        MaterialPageRoute(builder: (context) => BottomBar()),
       );
     });
   }
