@@ -12,6 +12,7 @@ class _CompetitionsState extends State<Competitions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.orangeAccent,
         body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -21,10 +22,14 @@ class _CompetitionsState extends State<Competitions> {
                   height: 200,
                   width: 200,
                   child: ElevatedButton(
-                      child: Center(child: Text('Find a Competition')),
+                      child: Center(child: Text('Find a Competition', style: TextStyle(fontWeight: FontWeight.bold))),
                       style: ElevatedButton.styleFrom(
                         shape: CircleBorder(),
                         primary: Colors.deepOrangeAccent,
+                        onPrimary: Colors.white,
+                        shadowColor: Colors.black,
+                        elevation: 10,
+                        side: BorderSide(color: Colors.black26, width: 1),
                       ),
                       onPressed: () {
                         print('Do Something');
@@ -34,9 +39,30 @@ class _CompetitionsState extends State<Competitions> {
 
                 // == RANKED ==
                 Container(
-                  decoration: BoxDecoration(border: Border.all(color: Colors.black38)),
+                  decoration: BoxDecoration(border: Border.all(color: Colors.black38),
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        offset: const Offset(
+                          3.0,
+                          3.0,
+                        ), //Offset
+                        blurRadius: 5,
+                        spreadRadius: 2,
+                      ), //BoxShadow
+                      BoxShadow(
+                        color: Colors.white,
+                        offset: const Offset(0.0, 0.0),
+                        blurRadius: 0.0,
+                        spreadRadius: 0.0,
+                      ), //BoxShadow
+                    ],),
                   child: CheckboxListTile(
-                    title: const Text('Ranked'),
+                    activeColor: Colors.deepOrange,
+                    checkColor: Colors.white,
+                    title: const Text('Ranked', style: TextStyle(fontWeight: FontWeight.bold)),
+                    subtitle: const Text('A competitive event which will affect your ranking'),
                     value: _value1,
                     onChanged: (bool value) {
                       _value2 = false;
@@ -51,9 +77,30 @@ class _CompetitionsState extends State<Competitions> {
 
                 // == UNRANKED ==
                 Container(
-                  decoration: BoxDecoration(border: Border.all(color: Colors.black38)),
+                  decoration: BoxDecoration(border: Border.all(color: Colors.black38),
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        offset: const Offset(
+                          3.0,
+                          3.0,
+                        ), //Offset
+                        blurRadius: 5,
+                        spreadRadius: 2,
+                      ), //BoxShadow
+                      BoxShadow(
+                        color: Colors.white,
+                        offset: const Offset(0.0, 0.0),
+                        blurRadius: 0.0,
+                        spreadRadius: 0.0,
+                      ), //BoxShadow
+                    ],),
                   child: CheckboxListTile(
-                    title: const Text('Unranked'),
+                    activeColor: Colors.deepOrange,
+                    checkColor: Colors.white,
+                    title: const Text('Unranked', style: TextStyle(fontWeight: FontWeight.bold)),
+                    subtitle: const Text('A casual event which will NOT affect your ranking'),
                     value: _value2,
                     onChanged: (bool value) {
                       _value1 = false;
