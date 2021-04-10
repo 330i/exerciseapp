@@ -12,7 +12,8 @@ class LeaderboardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color:Colors.green, borderRadius: BorderRadius.only(topLeft: Radius.circular(50.0),topRight: Radius.circular(50.0))),
+      alignment: Alignment.bottomCenter,
+      decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.only(topLeft: Radius.circular(50.0),topRight: Radius.circular(50.0))),
       child: Padding(
         padding: EdgeInsets.only(top: 20.0),
         child: Container(
