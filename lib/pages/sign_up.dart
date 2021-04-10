@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:exerciseapp/model/user.dart';
+import 'package:exerciseapp/widgets/bottom_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -50,15 +51,12 @@ class _SignUpPageState extends State<SignUpPage> {
         mile: toDouble(mileTime.text),
         pushup: toInt(pushups.text),
         crunch: toInt(crunches.text),
+        competition: '',
       ).toJson());
     });
-
-
-
-
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => PlaceHolder()),
+      MaterialPageRoute(builder: (context) => BottomBar()),
     );
   }
 

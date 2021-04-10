@@ -10,10 +10,11 @@ class Athlete {
   double mile;
   int pushup;
   int crunch;
+  String competition;
 
   DocumentReference reference;
 
-  Athlete({this.username, this.email, this.uid, this.url, this.rank, this.mile, this.pushup, this.crunch});
+  Athlete({this.username, this.email, this.uid, this.url, this.rank, this.mile, this.pushup, this.crunch, this.competition});
 
   factory Athlete.fromSnapshot(DocumentSnapshot snapshot) {
     Athlete newUser = Athlete.fromJson(snapshot.data());
@@ -31,6 +32,7 @@ class Athlete {
       mile: json['mile'] as double,
       pushup: json['pushup'] as int,
       crunch: json['crunch'] as int,
+      competition: json['competition'] as String,
     );
   }
 
@@ -46,6 +48,7 @@ class Athlete {
       'mile': instance.mile,
       'pushup': instance.pushup,
       'crunch': instance.crunch,
+      'competition' : instance.competition,
     };
   }
 
