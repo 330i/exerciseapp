@@ -11,12 +11,12 @@ class UserProfilePage extends StatefulWidget {
 class _UserProfilePageState extends State<UserProfilePage> {
   var user = {
     "rank": 1,
-    "pfp": "https://i.imgur.com/AtjuEkK.png",
+    'photo': "https://i.imgur.com/AtjuEkK.png",
     "username": "Bob",
-    "score": 1000,
-    "mile_time": "13:00",
-    "pushup_per_min": 50,
-    "crunches_per_min": 50,
+    "score": 1001,
+    "mile": "13:00",
+    "pushup": 50,
+    "crunch": 50,
   };
   @override
   Widget build(BuildContext context) {
@@ -27,21 +27,21 @@ class _UserProfilePageState extends State<UserProfilePage> {
             Positioned(
               bottom: 0,
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.35,
+              height: MediaQuery.of(context).size.height * 0.4,
               child: Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     UserStatsBox(
-                      stat: user["mile_time"].toString(),
+                      stat: user["mile"].toString(),
                       statType: 'Mile Time',
                     ),
                     UserStatsBox(
-                      stat: user['pushup_per_min'].toString(),
+                      stat: user['pushup'].toString(),
                       statType: 'Pushups',
                     ),
                     UserStatsBox(
-                      stat: user['crunches_per_min'].toString(),
+                      stat: user['crunch'].toString(),
                       statType: 'Crunches',
                     ),
                   ],
@@ -52,7 +52,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
               top: 0,
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.65,
+                height: MediaQuery.of(context).size.height * 0.6,
                 decoration: BoxDecoration(
                   color: Color(0xffff9800),
                   borderRadius: BorderRadius.only(
@@ -71,7 +71,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                             border: Border.all(width: 4.0, color: Colors.white),
                             borderRadius: BorderRadius.circular(100.0),
                           ),
-                          child: Pfp(imageUrl: user['pfp'], size: 100.0),
+                          child: Pfp(imageUrl: user['photo'], size: 100.0),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -93,7 +93,10 @@ class _UserProfilePageState extends State<UserProfilePage> {
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 50.0),
-                          child: UserMainStats(),
+                          child: UserMainStats(
+                            rank: user['rank'].toString(),
+                            score: user['score'].toString(),
+                          ),
                         )
                       ],
                     ),

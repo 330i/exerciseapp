@@ -61,25 +61,26 @@ class _GlobalUsersPageState extends State<GlobalUsersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      child: Column(
-        children: [
-          Expanded(
-              child: Stack(
-            children: [
-              LeaderboardPodium(leaderboard.sublist(0, 3)),
-              Positioned(
-                  width: MediaQuery.of(context).size.width,
-                  height: 490.0,
-                  bottom: 10,
-                  child: Container(
-                    decoration: BoxDecoration(color: Color(0xffff9800)),
-                    child: LeaderboardList(leaderboard.sublist(0)),
-                  )),
-            ],
-          )),
-        ],
+      body: Container(
+        child: Column(
+          children: [
+            Expanded(
+                child: Stack(
+              children: [
+                LeaderboardPodium(leaderboard.sublist(0, 3)),
+                Positioned(
+                    width: MediaQuery.of(context).size.width,
+                    height: 480.0,
+                    bottom: 10,
+                    child: Container(
+                      decoration: BoxDecoration(color: Color(0xffff9800)),
+                      child: LeaderboardList(leaderboard.sublist(0)),
+                    )),
+              ],
+            )),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }
