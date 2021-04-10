@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../pfp.dart';
+import '../hexPfp.dart';
+
 
 class LeaderboardSlot extends StatelessWidget {
   final Map slot;

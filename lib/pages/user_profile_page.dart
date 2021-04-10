@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/pfp.dart';
+import '../widgets/hexPfp.dart';
 import '../widgets/user_stats_box.dart';
 import '../widgets/user_main_stats.dart';
 
@@ -68,10 +69,10 @@ class _UserProfilePageState extends State<UserProfilePage> {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                            border: Border.all(width: 4.0, color: Colors.white),
-                            borderRadius: BorderRadius.circular(100.0),
+                            // border: Border.all(width: 4.0, color: Colors.white),
+                            // borderRadius: BorderRadius.circular(100.0),
                           ),
-                          child: Pfp(imageUrl: user['photo'], size: 100.0),
+                          child: HexPfp(imageUrl: user['photo'], size: 100.0),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,

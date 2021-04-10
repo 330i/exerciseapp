@@ -35,7 +35,7 @@ class LeaderboardPodium extends StatelessWidget {
             Container(
                 margin: EdgeInsets.only(top: 60.0),
                 child: _podiumSpotBuilder(
-                    pfpSize: 80.0,
+                    pfpSize: 90.0,
                     pfpUrl: topThree[0]['pfp'],
                     username: topThree[0]['username'],
                     score: topThree[0]['score'],
