@@ -1,4 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:exerciseapp/pages/tournament_page.dart';
 import 'package:flutter/material.dart';
 import '../pages/global_users_page.dart';
 import '../pages/user_profile_page.dart';
@@ -10,7 +11,7 @@ class BottomBar extends StatefulWidget {
 
 class _BottomBarState extends State<BottomBar> {
   int _currentIndex = 0;
-  final List<Widget> _children = [GlobalUsersPage(),UserProfilePage()];
+  final List<Widget> _children = [UserProfilePage(), TournamentPage(), GlobalUsersPage()];
 
   @override
   Widget build(BuildContext context) {
