@@ -1,8 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:exerciseapp/pages/place_holder.dart';
-import 'package:exerciseapp/pages/tournament_page.dart';
-
+import '../pages/global_users_page.dart';
+import '../pages/user_profile_page.dart';
 
 class BottomBar extends StatefulWidget {
   @override
@@ -11,7 +10,7 @@ class BottomBar extends StatefulWidget {
 
 class _BottomBarState extends State<BottomBar> {
   int _currentIndex = 0;
-  final List<Widget> _children = [PlaceHolder(), TournamentPage(), PlaceHolder()];
+  final List<Widget> _children = [GlobalUsersPage(),UserProfilePage()];
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +21,21 @@ class _BottomBarState extends State<BottomBar> {
           color: Colors.orange,
           backgroundColor: Colors.white,
           items: <Widget>[
-            Icon(Icons.home, size: 30, color: Colors.white,),
-            Icon(Icons.calendar_today, size: 30, color: Colors.white,),
-            Icon(Icons.people, size: 30, color: Colors.white,),
+            Icon(
+              Icons.home,
+              size: 30,
+              color: Colors.white,
+            ),
+            Icon(
+              Icons.calendar_today,
+              size: 30,
+              color: Colors.white,
+            ),
+            Icon(
+              Icons.people,
+              size: 30,
+              color: Colors.white,
+            ),
           ],
           onTap: (index) {
             onTabTabbed(index);
