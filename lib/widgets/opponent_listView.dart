@@ -1,7 +1,10 @@
-import 'package:exerciseapp/widgets/opponent_list_data.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:exerciseapp/themes.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:intl/intl.dart';
 
 
 class OpponentsListView extends StatefulWidget {
@@ -9,34 +12,71 @@ class OpponentsListView extends StatefulWidget {
   _OpponentsListViewState createState() => _OpponentsListViewState();
 }
 
-class _OpponentsListViewState extends State<OpponentsListView>
-    with TickerProviderStateMixin {
-  List<OpponentListData> opponentsListData = OpponentListData.tabIconsList;
+class _OpponentsListViewState extends State<OpponentsListView> {
 
-  Future<bool> getData() async {
-    await Future<dynamic>.delayed(const Duration(milliseconds: 50));
-    return true;
+  List<OpponentListData> opList = [];
+
+  getOpponentListData() async {
+    List<OpponentListData> opponentList = [];
+    await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser.uid).get().then((userData) async {
+      await FirebaseFirestore.instance.collection('competitions').doc(userData.data()['competition']).collection('competitors').get().then((competitorData) async {
+        for(var i=0;i<competitorData.size;i++) {
+          String photoUrl = await FirebaseStorage.instance.ref(competitorData.docs[i].data()['photo']).getDownloadURL();
+          setState(() {
+            opponentList.add(
+              OpponentListData(
+                titleTxt: competitorData.docs[i].data()['name'],
+                score: competitorData.docs[i].data()['score'],
+                stats: <String>["${(competitorData.docs[i].data()['mile']/60).floor()}:${NumberFormat('00.##').format(competitorData.docs[i].data()['mile']%60)}","${competitorData.docs[i].data()['pushup']}", "${competitorData.docs[i].data()['crunch']}"],
+                startColor: '#FA7D82',
+                endColor: '#FFB295',
+                photo: photoUrl,
+              ),
+            );
+          });
+        }
+      });
+    });
+    print(opponentList.length);
+    opList = opponentList;
+  }
+
+  @override
+  void initState() {
+    getOpponentListData();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-              height: 216,
-              width: double.infinity,
-              child: ListView.builder(
-                padding: const EdgeInsets.only(
-                    top: 0, bottom: 0, right: 16, left: 16),
-                itemCount: opponentsListData.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (BuildContext context, int index) {
-                  final int count =
-                  opponentsListData.length > 10 ? 10 : opponentsListData.length;
-                  return OpponentsView(
-                    opponentsListData: opponentsListData[index],
-                  );
-                },
-              ),
+    if(opList==null) {
+      return Center(
+        child: Container(
+          width: 50,
+          height: 50,
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+    else {
+      final int count =
+      opList.length > 10 ? 10 : opList.length;
+      return Container(
+        height: 216,
+        width: double.infinity,
+        child: ListView.builder(
+          padding: const EdgeInsets.only(
+              top: 0, bottom: 0, right: 16, left: 16),
+          itemCount: count,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (BuildContext context, int index) {
+            return OpponentsView(
+              opponentsListData: opList[index],
             );
+          },
+        ),
+      );
+    }
   }
 }
 
@@ -89,11 +129,11 @@ class OpponentsView extends StatelessWidget {
                           children: <Widget>[
                             Text(
                               opponentsListData.titleTxt,
-                              textAlign: TextAlign.center,
+                              textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontFamily: FitnessAppTheme.fontName,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                                fontSize: 16,
                                 letterSpacing: 0.2,
                                 color: FitnessAppTheme.white,
                               ),
@@ -107,11 +147,21 @@ class OpponentsView extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      opponentsListData.mileTime.toString() +'\n' + opponentsListData.pushups.toString() +'\n' +opponentsListData.crunches.toString(),
+                                      'Mile: \nPushup: \nCrunch: ',
                                       style: TextStyle(
                                         fontFamily: FitnessAppTheme.fontName,
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 16,
+                                        fontSize: 10,
+                                        letterSpacing: 0.2,
+                                        color: FitnessAppTheme.white,
+                                      ),
+                                    ),
+                                    Text(
+                                      opponentsListData.stats.join('\n'),
+                                      style: TextStyle(
+                                        fontFamily: FitnessAppTheme.fontName,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 10,
                                         letterSpacing: 0.2,
                                         color: FitnessAppTheme.white,
                                       ),
@@ -140,7 +190,7 @@ class OpponentsView extends StatelessWidget {
                                   padding: const EdgeInsets.only(
                                       left: 4, bottom: 3),
                                   child: Text(
-                                    'score',
+                                    'Score',
                                     style: TextStyle(
                                       fontFamily:
                                       FitnessAppTheme.fontName,
@@ -182,13 +232,40 @@ class OpponentsView extends StatelessWidget {
                   Positioned(
                     top: 0,
                     left: 0,
-                    child: Container(
-                      width: 84,
-                      height: 84,
-                      decoration: BoxDecoration(
-                        color: FitnessAppTheme.nearlyWhite.withOpacity(0.2),
-                        shape: BoxShape.circle,
-                      ),
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: 84,
+                          height: 84,
+                          decoration: BoxDecoration(
+                            color: FitnessAppTheme.nearlyWhite.withOpacity(0.2),
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.white.withOpacity(0.5),
+                                spreadRadius: 1,
+                                blurRadius: 3,
+                                offset: Offset(0, 0), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                        ),
+                        ClipRRect(
+                          child: Container(
+                            child: Image.network(
+                              opponentsListData.photo,
+                              fit: BoxFit.cover,
+                            ),
+                            width: 84,
+                            height: 84,
+                            decoration: BoxDecoration(
+                              color: FitnessAppTheme.nearlyWhite.withOpacity(0.2),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                          borderRadius: BorderRadius.circular(42),
+                        ),
+                      ],
                     ),
                   ),
                   Positioned(
@@ -204,4 +281,24 @@ class OpponentsView extends StatelessWidget {
               ),
             );
   }
+}
+
+class OpponentListData {
+  OpponentListData({
+    //this.imagePath = '',
+    this.titleTxt = '',
+    this.startColor = '',
+    this.endColor = '',
+    this.stats,
+    this.score = 0,
+    this.photo = '',
+  });
+
+  //String imagePath;
+  String titleTxt;
+  String startColor;
+  String endColor;
+  List<String> stats;
+  int score;
+  String photo;
 }

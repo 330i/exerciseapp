@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:validators/sanitizers.dart';
 import 'login_page.dart';
-import 'place_holder.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);
@@ -30,7 +29,6 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController crunches = new TextEditingController();
   String url;
   File _profileimg;
-  FirebaseStorage _storage = FirebaseStorage.instance;
 
 
   @override
@@ -95,7 +93,7 @@ class _SignUpPageState extends State<SignUpPage> {
             borderRadius: BorderRadius.all(Radius.circular(5)),
             boxShadow: <BoxShadow>[
               BoxShadow(
-                  color: Colors.grey.shade200,
+                  color: Colors.orange.shade200,
                   offset: Offset(2, 4),
                   blurRadius: 5,
                   spreadRadius: 2)
@@ -103,9 +101,9 @@ class _SignUpPageState extends State<SignUpPage> {
             gradient: LinearGradient(
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
-                colors: [Color.fromRGBO(108, 159, 206, 1), Colors.blueAccent])),
+                colors: [Colors.orangeAccent[100], Colors.orangeAccent[200]])),
         child: Text(
-          'Register Now',
+          'Register',
           style: TextStyle(fontSize: 20, color: Colors.white),
         ),
       ),
