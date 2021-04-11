@@ -17,19 +17,50 @@ class LeaderboardList extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(50.0), topRight: Radius.circular(50.0))),
-      child: Padding(
-        padding: EdgeInsets.only(top: 20.0),
-        child: Container(
-          child: ListView(
-            scrollDirection: Axis.vertical,
-            padding: EdgeInsets.zero,
-            children: [
-              ...leaderboard.map((QueryDocumentSnapshot slot) {
-                return _buildSlot(slot, leaderboard.indexOf(slot) + 1);
-              })
-            ],
-          ),
+              topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0))),
+      child: Container(
+        height: 375,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 15,
+                ),
+                Text(
+                  'Place',
+                  style: TextStyle(
+                    color: Colors.black54,
+                  ),
+                ),
+                Spacer(flex: 1,),
+                Text(
+                  'Score',
+                  style: TextStyle(
+                    color: Colors.black54,
+                  ),
+                ),
+                Container(
+                  width: 25,
+                ),
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 25.0),
+              child: Container(
+                height: 334,
+                child: ListView(
+                  scrollDirection: Axis.vertical,
+                  padding: EdgeInsets.zero,
+                  children: [
+                    ...leaderboard.map((QueryDocumentSnapshot slot) {
+                      return _buildSlot(slot, leaderboard.indexOf(slot) + 1);
+                    })
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
