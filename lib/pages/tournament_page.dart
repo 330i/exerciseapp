@@ -51,6 +51,7 @@ class _TournamentPageState extends State<TournamentPage> {
                   return Scaffold(
                     body: ListView(children: [
                       Container(
+                        color: Colors.white,
                         height: 10,
                       ),
                       Container(
@@ -58,18 +59,18 @@ class _TournamentPageState extends State<TournamentPage> {
                         height: 50,
                         child: Row(
                           children: [
-                            Spacer(
-                              flex: 1,
+                            Container(
+                              width: 25,
                             ),
                             Text(
-                              'Tournament Tracker',
+                              'Tournament',
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 25,
                               ),
                             ),
                             Spacer(
-                              flex: 5,
+                              flex: 1,
                             ),
                           ],
                         ),
@@ -82,71 +83,100 @@ class _TournamentPageState extends State<TournamentPage> {
                             Column(
                               children: [
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     SizedBox(
                                       width: 20,
                                     ),
                                     _entryField("Mile time (in seconds)", mileTime),
                                     SizedBox(width: 10,),
-                                    Container(
-                                      height: 50,
-                                      child: ElevatedButton(
-                                        onPressed: null,
-                                        child: Icon(
-                                          Icons.add,
-                                          color: Colors.white,
-                                          size: 30,
+                                    Column(
+                                      children: [
+                                        Container(
+                                          height: 50,
+                                          child: ElevatedButton(
+                                            onPressed: null,
+                                            child: Icon(
+                                              Icons.add,
+                                              color: Colors.white,
+                                              size: 30,
+                                            ),
+                                            style: ButtonStyle(
+                                              backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrangeAccent[100]),
+                                            ),
+                                          ),
                                         ),
-                                        style: ButtonStyle(
-                                          backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrangeAccent[100]),
+                                        Container(
+                                          height: 20,
                                         ),
-                                      ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                                Row(children: [
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  _entryField("Pushup in 1 Minute", pushup),
-                                  SizedBox(width: 10,),
-                                  Container(
-                                    height: 50,
-                                    child: ElevatedButton(
-                                      onPressed: null,
-                                      child: Icon(
-                                        Icons.add,
-                                        color: Colors.white,
-                                        size: 30,
-                                      ),
-                                      style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrangeAccent[100]),
-                                      ),
-                                    ),
-                                  ),
-                                ]),
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    _entryField("Pushup in 1 Minute", pushup),
+                                    SizedBox(width: 10,),
+                                    Column(
+                                      children: [
+                                        Container(
+                                          height: 50,
+                                          child: ElevatedButton(
+                                            onPressed: null,
+                                            child: Icon(
+                                              Icons.add,
+                                              color: Colors.white,
+                                              size: 30,
+                                            ),
+                                            style: ButtonStyle(
+                                              backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrangeAccent[100]),
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 20,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     SizedBox(
                                       width: 20,
                                     ),
                                     _entryField("Crunches in 1 Minute", crunches),
                                     SizedBox(width: 10,),
-                                    Container(
-                                      height: 50,
-                                      child: ElevatedButton(
-                                        onPressed: null,
-                                        child: Icon(
-                                          Icons.add,
-                                          color: Colors.white,
-                                          size: 30,
+                                    Column(
+                                      children: [
+                                        Container(
+                                          height: 50,
+                                          child: ElevatedButton(
+                                            onPressed: null,
+                                            child: Icon(
+                                              Icons.add,
+                                              color: Colors.white,
+                                              size: 30,
+                                            ),
+                                            style: ButtonStyle(
+                                              backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrangeAccent[100]),
+                                            ),
+                                          ),
                                         ),
-                                        style: ButtonStyle(
-                                          backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrangeAccent[100]),
+                                        Container(
+                                          height: 20,
                                         ),
-                                      ),
+                                      ],
                                     ),
                                   ],
+                                ),
+                                Container(
+                                  height: 20,
                                 ),
                               ],
                             ),
@@ -167,7 +197,7 @@ class _TournamentPageState extends State<TournamentPage> {
 
 Widget _entryField(String title, TextEditingController controller) {
   return Container(
-    height: 110,
+    height: 90,
     width: 250,
     margin: EdgeInsets.symmetric(vertical: 10),
     child: Column(

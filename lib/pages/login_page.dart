@@ -1,9 +1,9 @@
 import 'package:exerciseapp/widgets/bottom_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'sign_up.dart';
 import 'package:exerciseapp/widgets/bezier_container.dart';
-import 'place_holder.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -68,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
             borderRadius: BorderRadius.all(Radius.circular(5)),
             boxShadow: <BoxShadow>[
               BoxShadow(
-                  color: Colors.grey.shade200,
+                  color: Colors.orange.shade200,
                   offset: Offset(2, 4),
                   blurRadius: 5,
                   spreadRadius: 2)
@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
             gradient: LinearGradient(
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
-                colors: [Color.fromRGBO(108, 159, 206, 1), Colors.blueAccent])),
+                colors: [Colors.orangeAccent[100], Colors.orangeAccent[200]])),
         child: Text(
           'Login',
           style: TextStyle(fontSize: 20, color: Colors.white),
@@ -111,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
             Text(
               'Register',
               style: TextStyle(
-                  color: Colors.blue,
+                  color: Colors.orange,
                   fontSize: 13,
                   fontWeight: FontWeight.w600),
             ),
@@ -125,13 +125,18 @@ class _LoginPageState extends State<LoginPage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'Tide',
-          style: TextStyle(color: Color.fromRGBO(48, 79, 254, 1), fontSize: 30),
+          text: 'Step',
+          style: TextStyle(color: Colors.orange, fontSize: 30,fontWeight: FontWeight.normal),
           children: [
             TextSpan(
-              text: 'Pool',
-              style: TextStyle(color: Color.fromRGBO(128, 214, 255, 1), fontSize: 30),
-            ),
+                text: ' by ',
+                style: TextStyle(color: Colors.red, fontSize: 30, fontStyle: FontStyle.italic),
+                children: [
+                  TextSpan(
+                    text: 'Step',
+                    style: TextStyle(color: Colors.orange, fontSize: 30, fontStyle: FontStyle.normal),
+                  ),
+                ]),
           ]),
     );
   }
@@ -150,6 +155,13 @@ class _LoginPageState extends State<LoginPage> {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
         body: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
+                colors: [Colors.white, Colors.white],
+              )
+          ),
           height: height,
           child: Stack(
             children: <Widget>[

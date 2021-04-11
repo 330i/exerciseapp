@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:exerciseapp/themes.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -13,11 +14,14 @@ class OpponentsListView extends StatefulWidget {
 
 class _OpponentsListViewState extends State<OpponentsListView> {
 
-  Future<List<OpponentListData>> getOpponentListData() async {
+  List<OpponentListData> opList = [];
+
+  getOpponentListData() async {
     List<OpponentListData> opponentList = [];
     await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser.uid).get().then((userData) async {
-      await FirebaseFirestore.instance.collection('competitions').doc(userData.data()['competition']).collection('competitors').get().then((competitorData) {
+      await FirebaseFirestore.instance.collection('competitions').doc(userData.data()['competition']).collection('competitors').get().then((competitorData) async {
         for(var i=0;i<competitorData.size;i++) {
+          String photoUrl = await FirebaseStorage.instance.ref(competitorData.docs[i].data()['photo']).getDownloadURL();
           setState(() {
             opponentList.add(
               OpponentListData(
@@ -26,50 +30,53 @@ class _OpponentsListViewState extends State<OpponentsListView> {
                 stats: <String>["${(competitorData.docs[i].data()['mile']/60).floor()}:${NumberFormat('00.##').format(competitorData.docs[i].data()['mile']%60)}","${competitorData.docs[i].data()['pushup']}", "${competitorData.docs[i].data()['crunch']}"],
                 startColor: '#FA7D82',
                 endColor: '#FFB295',
+                photo: photoUrl,
               ),
             );
           });
         }
       });
     });
-    return opponentList;
+    print(opponentList.length);
+    opList = opponentList;
+  }
+
+  @override
+  void initState() {
+    getOpponentListData();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: getOpponentListData(),
-      builder: (context, snapshot) {
-        if(!snapshot.hasData) {
-          return Center(
-            child: Container(
-              width: 50,
-              height: 50,
-              child: CircularProgressIndicator(),
-            ),
-          );
-        }
-        else {
-          return Container(
-            height: 216,
-            width: double.infinity,
-            child: ListView.builder(
-              padding: const EdgeInsets.only(
-                  top: 0, bottom: 0, right: 16, left: 16),
-              itemCount: snapshot.data.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (BuildContext context, int index) {
-                final int count =
-                snapshot.data.length > 10 ? 10 : snapshot.data.length;
-                return OpponentsView(
-                  opponentsListData: snapshot.data[index],
-                );
-              },
-            ),
-          );
-        }
-      },
-    );
+    if(opList==null) {
+      return Center(
+        child: Container(
+          width: 50,
+          height: 50,
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+    else {
+      final int count =
+      opList.length > 10 ? 10 : opList.length;
+      return Container(
+        height: 216,
+        width: double.infinity,
+        child: ListView.builder(
+          padding: const EdgeInsets.only(
+              top: 0, bottom: 0, right: 16, left: 16),
+          itemCount: count,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (BuildContext context, int index) {
+            return OpponentsView(
+              opponentsListData: opList[index],
+            );
+          },
+        ),
+      );
+    }
   }
 }
 
@@ -245,7 +252,10 @@ class OpponentsView extends StatelessWidget {
                         ),
                         ClipRRect(
                           child: Container(
-                            child: Image.asset('assets/squirel.png'),
+                            child: Image.network(
+                              opponentsListData.photo,
+                              fit: BoxFit.cover,
+                            ),
                             width: 84,
                             height: 84,
                             decoration: BoxDecoration(
@@ -281,6 +291,7 @@ class OpponentListData {
     this.endColor = '',
     this.stats,
     this.score = 0,
+    this.photo = '',
   });
 
   //String imagePath;
@@ -289,4 +300,5 @@ class OpponentListData {
   String endColor;
   List<String> stats;
   int score;
+  String photo;
 }

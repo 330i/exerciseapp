@@ -1,5 +1,4 @@
 import 'package:exerciseapp/pages/login_page.dart';
-import 'package:exerciseapp/pages/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -33,9 +32,6 @@ class MyApp extends StatelessWidget {
           );
         },
       ),
-    );
-    return MaterialApp(
-      home: SignUpPage(),
     );
   }
 }
