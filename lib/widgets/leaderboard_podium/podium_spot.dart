@@ -36,7 +36,7 @@ class PodiumSpot extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.only(right: 3.2, bottom: 1.0),
                   child: Icon(FontAwesomeIcons.crown,
-                      size: 13.0, color: Colors.redAccent),
+                      size: 13.0, color: Colors.white),
                 )));
       case 3:
         return Container(
@@ -49,7 +49,7 @@ class PodiumSpot extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.only(right: 3.2, bottom: 1.0),
                   child: Icon(FontAwesomeIcons.crown,
-                      size: 13.0, color: Colors.white),
+                      size: 13.0, color: Colors.redAccent),
                 )));
       default:
         return Icon(FontAwesomeIcons.crown,
