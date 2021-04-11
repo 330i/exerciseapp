@@ -49,7 +49,7 @@ class PodiumSpot extends StatelessWidget {
                 child: Padding(
               padding: EdgeInsets.only(right: 3.2, bottom: 1.0),
               child: Icon(FontAwesomeIcons.crown,
-                  size: 13.0, color: Colors.orangeAccent),
+                  size: 13.0, color: Colors.white),
             )));
       default:
         return Icon(FontAwesomeIcons.crown,
@@ -75,9 +75,8 @@ class PodiumSpot extends StatelessWidget {
             child: Text(
                 username,
                 style: TextStyle(
-                  fontSize: 21.0,
-                  fontWeight: FontWeight.w900,
-                  fontFamily: "Nunito",
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w600,
                 ),
                 textAlign: TextAlign.center,
               ),
