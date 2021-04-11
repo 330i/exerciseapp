@@ -22,18 +22,16 @@ class _OpponentsListViewState extends State<OpponentsListView> {
       await FirebaseFirestore.instance.collection('competitions').doc(userData.data()['competition']).collection('competitors').get().then((competitorData) async {
         for(var i=0;i<competitorData.size;i++) {
           String photoUrl = await FirebaseStorage.instance.ref(competitorData.docs[i].data()['photo']).getDownloadURL();
-          setState(() {
-            opponentList.add(
-              OpponentListData(
-                titleTxt: competitorData.docs[i].data()['name'],
-                score: (competitorData.docs[i].data()['score']).round(),
-                stats: <String>["${(competitorData.docs[i].data()['mile']/60).floor()}:${NumberFormat('00.##').format(competitorData.docs[i].data()['mile']%60)}","${competitorData.docs[i].data()['pushup']}", "${competitorData.docs[i].data()['crunch']}"],
-                startColor: '#FA7D82',
-                endColor: '#FFB295',
-                photo: photoUrl,
-              ),
-            );
-          });
+          opponentList.add(
+            OpponentListData(
+              titleTxt: competitorData.docs[i].data()['name'],
+              score: (competitorData.docs[i].data()['score']).round(),
+              stats: <String>["${(competitorData.docs[i].data()['mile']/60).floor()}:${NumberFormat('00.##').format(competitorData.docs[i].data()['mile']%60)}","${competitorData.docs[i].data()['pushup']}", "${competitorData.docs[i].data()['crunch']}"],
+              startColor: '#FA7D82',
+              endColor: '#FFB295',
+              photo: photoUrl,
+            ),
+          );
         }
       });
     });

@@ -37,7 +37,7 @@ class LeaderboardSlot extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 18.0,
                     fontFamily: 'Nunito',
-                    fontWeight: FontWeight.w700)),
+                    fontWeight: FontWeight.w500)),
           ),
           Spacer(),
           Container(
@@ -46,7 +46,7 @@ class LeaderboardSlot extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 17.0,
                     fontFamily: "Nunito",
-                    fontWeight: FontWeight.w800)),
+                    fontWeight: FontWeight.w400)),
           )
         ],
       ),

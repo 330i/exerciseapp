@@ -21,7 +21,7 @@ class Pfp extends StatelessWidget {
                   color: Color(0xed6f24),
                   borderRadius: BorderRadius.circular(size),
                   image: DecorationImage(
-                      fit: BoxFit.fill, image: NetworkImage(photoSnap.data)),
+                      fit: BoxFit.cover, image: NetworkImage(photoSnap.data)),
                 ),
               ),
             );

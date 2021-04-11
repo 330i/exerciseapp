@@ -102,17 +102,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              FutureBuilder(
-                                future: FirebaseStorage.instance.ref(snapshot.data['photo']).getDownloadURL(),
-                                builder: (context, photoSnap) {
-                                  if(!photoSnap.hasData) {
-                                    return Container();
-                                  }
-                                  else {
-                                    return HexPfp(imageUrl: photoSnap.data, size: 125.0);
-                                  }
-                                },
-                              ),
+                              HexPfp(imageUrl: snapshot.data['photo'], size: 125.0),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
