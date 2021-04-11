@@ -70,7 +70,7 @@ class _GlobalUsersPageState extends State<GlobalUsersPage> {
                 LeaderboardPodium(leaderboard.sublist(0, 3)),
                 Positioned(
                     width: MediaQuery.of(context).size.width,
-                    height: 480.0,
+                    height: 400.0,
                     bottom: 10,
                     child: Container(
                       decoration: BoxDecoration(color: Color(0xffff9800)),
