@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import './podium_spot.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LeaderboardPodium extends StatelessWidget {
-  final List<Map> topThree;
+  final List<QueryDocumentSnapshot> topThree;
   LeaderboardPodium(this.topThree);
 
   Widget _podiumSpotBuilder({username, pfpSize, pfpUrl, score, rank}) {
@@ -15,6 +16,7 @@ class LeaderboardPodium extends StatelessWidget {
     );
   }
 
+  
   @override
   Widget build(BuildContext context) {
     return Container(

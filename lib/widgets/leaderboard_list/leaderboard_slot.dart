@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import '../pfp.dart';
 import '../hexPfp.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LeaderboardSlot extends StatelessWidget {
-  final Map slot;
-  LeaderboardSlot(this.slot);
+  final QueryDocumentSnapshot slot;
+  final int rank;
+  LeaderboardSlot(this.slot, this.rank);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class LeaderboardSlot extends StatelessWidget {
         children: <Widget>[
           Container(
             margin: EdgeInsets.only(left: 25.0),
-            child: Text(slot['rank'].toString(),
+            child: Text(rank.toString(),
                 style: TextStyle(
                     fontSize: 18.0,
                     color: Colors.grey,
