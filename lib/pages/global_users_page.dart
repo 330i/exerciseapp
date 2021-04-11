@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../widgets/leaderboard_podium/leaderboard_podium.dart';
 import '../widgets/leaderboard_list/leaderboard_list.dart';
@@ -8,58 +9,7 @@ class GlobalUsersPage extends StatefulWidget {
 }
 
 class _GlobalUsersPageState extends State<GlobalUsersPage> {
-  var leaderboard = [
-    {
-      "rank": 1,
-      'photo': "https://i.imgur.com/AtjuEkK.png",
-      "username": "Bob",
-      "score": 1000
-    },
-    {
-      "rank": 2,
-      'photo': "https://i.imgur.com/AtjuEkK.png",
-      "username": "Joe",
-      "score": 999
-    },
-    {
-      "rank": 3,
-      'photo': "https://i.imgur.com/AtjuEkK.png",
-      "username": "George",
-      "score": 998
-    },
-    {
-      "rank": 4,
-      'photo': "https://i.imgur.com/AtjuEkK.png",
-      "username": "Jack",
-      "score": 997
-    },
-    {
-      "rank": 5,
-      'photo': "https://i.imgur.com/AtjuEkK.png",
-      "username": "Jack",
-      "score": 997
-    },
-    {
-      "rank": 6,
-      'photo': "https://i.imgur.com/AtjuEkK.png",
-      "username": "Jack",
-      "score": 997
-    },
-    {
-      "rank": 7,
-      'photo': "https://i.imgur.com/AtjuEkK.png",
-      "username": "Jack",
-      "score": 997
-    },
-    {
-      "rank": 8,
-      'photo': "https://i.imgur.com/AtjuEkK.png",
-      "username": "Jack",
-      "score": 997
-    },
-  ];
-  @override
-  Widget build(BuildContext context) {
+  Widget _leaderboardPageBuilder(List<QueryDocumentSnapshot> leaderboard) {
     return Scaffold(
       body: Container(
         child: Column(
@@ -81,6 +31,26 @@ class _GlobalUsersPageState extends State<GlobalUsersPage> {
           ],
         ),
       ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+
+    return FutureBuilder(
+      future: users.orderBy('score').limit(10).get(),
+      builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasData) {
+            return _leaderboardPageBuilder(
+                (snapshot.data as QuerySnapshot).docs.reversed.toList());
+          }
+        }
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
   }
 }
