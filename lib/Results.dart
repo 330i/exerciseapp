@@ -79,9 +79,16 @@ class _ResultsState extends State<Results> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          // == MESSAGE ==
+                          Container(
+                            child: Text(
+                              "Great job! Keep it up 😊", style: TextStyle(fontSize: 20),
+                            ),
+                          ),
+
                           // == SPACE ==
                           Container(
-                            height: 50,
+                            height: 25,
                           ),
 
                           // == PLACEMENT ==
@@ -212,20 +219,20 @@ class _ResultsState extends State<Results> {
 
                           // == HOME BUTTON ==
                           Container(
+                            height: 50,
+                            width: 80,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.orangeAccent,
                                 ),
                                 child: Text('OK',
-                                  style: TextStyle(color: Colors.black),
+                                  style: TextStyle(color: Colors.black, fontSize: 18),
                                 ),
                                 onPressed: () {
                                   print('yes');
                                 },
                               )
                           ),
-
-
                         ],
 
                       )
