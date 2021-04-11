@@ -1,8 +1,14 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:exerciseapp/widgets/opponent_listView.dart';
+import 'package:image_picker/image_picker.dart';
 import 'dart:ui';
+
+import 'package:validators/sanitizers.dart';
 
 class TournamentPage extends StatefulWidget {
   @override
@@ -13,6 +19,23 @@ class _TournamentPageState extends State<TournamentPage> {
   TextEditingController mileTime = new TextEditingController();
   TextEditingController pushup = new TextEditingController();
   TextEditingController crunches = new TextEditingController();
+
+  setVideo(int type) async {
+    File _videoFile;
+    PickedFile _pickedImage = await ImagePicker().getVideo(source: ImageSource.camera);
+    setState(() {
+      _videoFile = File(_pickedImage.path);
+    });
+    FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser.uid).get().then((userValue) {
+      DocumentReference reference = FirebaseFirestore.instance.collection('competitions').doc(userValue.data()['competition']).collection('competitors').doc(FirebaseAuth.instance.currentUser.uid).collection('videos').doc();
+      reference.set({
+        'type': type,
+        'location':'${FirebaseAuth.instance.currentUser.uid}/${userValue.data()['competition']}/${reference.id}'
+      }).whenComplete(() {
+        FirebaseStorage.instance.ref().child('${FirebaseAuth.instance.currentUser.uid}').child(userValue.data()['competition']).child(reference.id).putFile(_videoFile);
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +58,8 @@ class _TournamentPageState extends State<TournamentPage> {
             );
           }
           else {
-            return FutureBuilder(
-              future: FirebaseFirestore.instance.collection('competitions').doc(userSnap.data['competition']).get(),
+            return StreamBuilder(
+              stream: FirebaseFirestore.instance.collection('competitions').doc(userSnap.data['competition']).snapshots(),
               builder: (context, snapshot) {
                 if(!snapshot.hasData) {
                   return Center(
@@ -95,7 +118,14 @@ class _TournamentPageState extends State<TournamentPage> {
                                         Container(
                                           height: 50,
                                           child: ElevatedButton(
-                                            onPressed: null,
+                                            onPressed: () {
+                                              if(mileTime.text.isNotEmpty) {
+                                                FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser.uid).update({
+                                                  'mile':toDouble(mileTime.text),
+                                                });
+                                                setVideo(1);
+                                              }
+                                            },
                                             child: Icon(
                                               Icons.add,
                                               color: Colors.white,
@@ -126,7 +156,14 @@ class _TournamentPageState extends State<TournamentPage> {
                                         Container(
                                           height: 50,
                                           child: ElevatedButton(
-                                            onPressed: null,
+                                            onPressed: () {
+                                              if(mileTime.text.isNotEmpty) {
+                                                FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser.uid).update({
+                                                  'pushup':toDouble(mileTime.text),
+                                                });
+                                                setVideo(2);
+                                              }
+                                            },
                                             child: Icon(
                                               Icons.add,
                                               color: Colors.white,
@@ -157,7 +194,14 @@ class _TournamentPageState extends State<TournamentPage> {
                                         Container(
                                           height: 50,
                                           child: ElevatedButton(
-                                            onPressed: null,
+                                            onPressed: () {
+                                              if(mileTime.text.isNotEmpty) {
+                                                FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser.uid).update({
+                                                  'crunch':toDouble(mileTime.text),
+                                                });
+                                                setVideo(3);
+                                              }
+                                            },
                                             child: Icon(
                                               Icons.add,
                                               color: Colors.white,
@@ -214,6 +258,7 @@ Widget _entryField(String title, TextEditingController controller) {
         SizedBox(height: 10),
         TextField(
             controller: controller,
+            keyboardType: TextInputType.number,
             decoration: InputDecoration(
                 fillColor: Colors.orange[100],
                 border: InputBorder.none,

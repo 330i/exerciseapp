@@ -45,7 +45,7 @@ class _SignUpPageState extends State<SignUpPage> {
         email: email.text,
         uid: currentUser.user.uid,
         url: _profileimg==null?'profilepicture/default.jpg':'profilepicture/${currentUser.user.uid}',
-        rank: 1,
+        score: 0,
         mile: toDouble(mileTime.text),
         pushup: toInt(pushups.text),
         crunch: toInt(crunches.text),
