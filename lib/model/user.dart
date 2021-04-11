@@ -6,7 +6,7 @@ class Athlete {
   String email;
   String uid;
   String url;
-  int rank;
+  int score;
   double mile;
   int pushup;
   int crunch;
@@ -14,7 +14,7 @@ class Athlete {
 
   DocumentReference reference;
 
-  Athlete({this.username, this.email, this.uid, this.url, this.rank, this.mile, this.pushup, this.crunch, this.competition});
+  Athlete({this.username, this.email, this.uid, this.url, this.score, this.mile, this.pushup, this.crunch, this.competition});
 
   factory Athlete.fromSnapshot(DocumentSnapshot snapshot) {
     Athlete newUser = Athlete.fromJson(snapshot.data());
@@ -28,7 +28,7 @@ class Athlete {
       email: json['email'] as String,
       uid: json['uid'] as String,
       url: json['photo'] as String,
-      rank: json['rank'] as int,
+      score: json['score'] as int,
       mile: json['mile'] as double,
       pushup: json['pushup'] as int,
       crunch: json['crunch'] as int,
@@ -44,7 +44,7 @@ class Athlete {
       'email': instance.email,
       'uid': instance.uid,
       'photo': instance.url,
-      'rank': instance.rank,
+      'rank': instance.score,
       'mile': instance.mile,
       'pushup': instance.pushup,
       'crunch': instance.crunch,

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -14,6 +16,22 @@ class UserProfilePage extends StatefulWidget {
 }
 
 class _UserProfilePageState extends State<UserProfilePage> {
+
+  int calculateLevel(int score) {
+    int leftScore = score;
+    int level = 0;
+    while(leftScore>0) {
+      if(level<100){
+        leftScore -= ((1/8)*level*level).round();
+        level++;
+      }
+      else {
+        leftScore -= ((10)*sqrt(leftScore-100)+1250).round();
+      }
+    }
+    return level;
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -29,6 +47,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
           );
         }
         else {
+          print(snapshot.data['score']);
           return Scaffold(
             body: SizedBox.expand(
               child: Stack(
@@ -63,11 +82,19 @@ class _UserProfilePageState extends State<UserProfilePage> {
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height * 0.6,
                       decoration: BoxDecoration(
-                        color: Color(0xffff9800),
+                        color: Colors.white,
                         borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(50.0),
-                          bottomRight: Radius.circular(50.0),
+                          bottomLeft: Radius.circular(20.0),
+                          bottomRight: Radius.circular(20.0),
                         ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 5,
+                            blurRadius: 5,
+                            offset: Offset(0, 2), // changes position of shadow
+                          ),
+                        ],
                       ),
                       child: Padding(
                         padding: EdgeInsets.only(bottom: 20.0),
@@ -96,10 +123,10 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                     child: Text(
                                       snapshot.data['username'],
                                       style: TextStyle(
-                                          fontFamily: "Nunito",
-                                          fontWeight: FontWeight.w900,
-                                          fontSize: 24.0,
-                                          color: Colors.white),
+                                        fontFamily: "Nunito",
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 24.0,
+                                      ),
                                     ),
                                   )
                                 ],
@@ -107,7 +134,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                               Container(
                                 margin: EdgeInsets.only(top: 50.0),
                                 child: UserMainStats(
-                                  rank: snapshot.data['rank'].toString(),
+                                  rank: calculateLevel((snapshot.data['score'])).toString(),
                                   score: snapshot.data['score'].toString(),
                                 ),
                               )

@@ -17,33 +17,36 @@ class UserMainStats extends StatelessWidget {
             children: [
               Text(rank,
                   style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 25.0,
-                      color: Colors.white)),
+                    fontWeight: FontWeight.w800,
+                    fontSize: 25.0,
+                  )),
               Text("Rank",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 17.0,
-                      color: Colors.white))
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 17.0,
+                ),
+              ),
             ],
           ),
           VerticalDivider(
             width: 50,
-            color: Colors.white,
+            color: Colors.black,
             thickness: 1.5,
           ),
           Column(
             children: [
               Text(score,
-                  style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 25.0,
-                      color: Colors.white)),
+                style: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  fontSize: 25.0,
+                ),
+              ),
               Text("Score",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 17.0,
-                      color: Colors.white))
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 17.0,
+                ),
+              ),
             ],
           )
         ],

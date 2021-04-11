@@ -20,11 +20,11 @@ class UserStatsBox extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 fontSize: 20.0)),
         Container(
-          width: 120.0,
-          height: 85.0,
+          width: 100.0,
+          height: 65.0,
           decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(20.0),
+              borderRadius: BorderRadius.circular(10.0),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.3),
