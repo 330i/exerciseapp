@@ -21,7 +21,7 @@ class LeaderboardPodium extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         width: MediaQuery.of(context).size.width,
-        color: Color(0xffff9800),
+        color: Colors.orangeAccent.shade100,
         height: 355.0,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -15,9 +15,19 @@ class LeaderboardList extends StatelessWidget {
     return Container(
       alignment: Alignment.bottomCenter,
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0))),
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.orange.withOpacity(0.3),
+            spreadRadius: -3,
+            blurRadius: 7,
+            offset: Offset(0, -15), // changes position of shadow
+          ),
+        ],
+      ),
       child: Container(
         height: 375,
         child: Column(
