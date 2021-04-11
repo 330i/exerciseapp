@@ -23,7 +23,7 @@ class _GlobalUsersPageState extends State<GlobalUsersPage> {
                         height: 400.0,
                         bottom: 10,
                         child: Container(
-                          decoration: BoxDecoration(color: Color(0xffff9800)),
+                          decoration: BoxDecoration(color: Colors.orangeAccent.shade100),
                           child: LeaderboardList(leaderboard.sublist(0)),
                         )),
                   ],
