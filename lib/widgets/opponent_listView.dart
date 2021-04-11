@@ -26,7 +26,7 @@ class _OpponentsListViewState extends State<OpponentsListView> {
             opponentList.add(
               OpponentListData(
                 titleTxt: competitorData.docs[i].data()['name'],
-                score: competitorData.docs[i].data()['score'],
+                score: (competitorData.docs[i].data()['score']).round(),
                 stats: <String>["${(competitorData.docs[i].data()['mile']/60).floor()}:${NumberFormat('00.##').format(competitorData.docs[i].data()['mile']%60)}","${competitorData.docs[i].data()['pushup']}", "${competitorData.docs[i].data()['crunch']}"],
                 startColor: '#FA7D82',
                 endColor: '#FFB295',
@@ -38,17 +38,19 @@ class _OpponentsListViewState extends State<OpponentsListView> {
       });
     });
     print(opponentList.length);
-    opList = opponentList;
+    setState(() {
+      opList = opponentList;
+    });
   }
 
   @override
   void initState() {
-    getOpponentListData();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    getOpponentListData();
     if(opList==null) {
       return Center(
         child: Container(
@@ -170,8 +172,7 @@ class OpponentsView extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            opponentsListData.score != 0
-                                ? Row(
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: <Widget>[
@@ -202,27 +203,6 @@ class OpponentsView extends StatelessWidget {
                                   ),
                                 ),
                               ],
-                            )
-                                : Container(
-                              decoration: BoxDecoration(
-                                color: FitnessAppTheme.nearlyWhite,
-                                shape: BoxShape.circle,
-                                boxShadow: <BoxShadow>[
-                                  BoxShadow(
-                                      color: FitnessAppTheme.nearlyBlack
-                                          .withOpacity(0.4),
-                                      offset: Offset(8.0, 8.0),
-                                      blurRadius: 8.0),
-                                ],
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(6.0),
-                                child: Icon(
-                                  Icons.add,
-                                  color: HexColor(opponentsListData.endColor),
-                                  size: 24,
-                                ),
-                              ),
                             ),
                           ],
                         ),

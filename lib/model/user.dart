@@ -44,7 +44,7 @@ class Athlete {
       'email': instance.email,
       'uid': instance.uid,
       'photo': instance.url,
-      'rank': instance.score,
+      'score': instance.score,
       'mile': instance.mile,
       'pushup': instance.pushup,
       'crunch': instance.crunch,

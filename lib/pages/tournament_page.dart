@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:exerciseapp/pages/competitions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +24,7 @@ class _TournamentPageState extends State<TournamentPage> {
 
   setVideo(int type) async {
     File _videoFile;
-    PickedFile _pickedImage = await ImagePicker().getVideo(source: ImageSource.camera);
+    PickedFile _pickedImage = await ImagePicker().getVideo(source: ImageSource.gallery);
     setState(() {
       _videoFile = File(_pickedImage.path);
     });
@@ -39,8 +41,8 @@ class _TournamentPageState extends State<TournamentPage> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser.uid).get(),
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser.uid).snapshots(),
       builder: (context, userSnap) {
         if(!userSnap.hasData) {
           return Center(
@@ -54,7 +56,7 @@ class _TournamentPageState extends State<TournamentPage> {
         else {
           if(userSnap.data['competition']=='') {
             return Center(
-              child: Text('Join Competition'),
+              child: Competitions(),
             );
           }
           else {
@@ -86,7 +88,7 @@ class _TournamentPageState extends State<TournamentPage> {
                               width: 25,
                             ),
                             Text(
-                              'Tournament',
+                              snapshot.data['type']==3?userSnap.data['competition']:'Tournament',
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 25,
@@ -122,6 +124,12 @@ class _TournamentPageState extends State<TournamentPage> {
                                               if(mileTime.text.isNotEmpty) {
                                                 FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser.uid).update({
                                                   'mile':toDouble(mileTime.text),
+                                                }).then((value) {
+                                                  print('${pow(2,(-0.005)*(userSnap.data['mile']-1550))}+${(1/100)*pow(userSnap.data['crunch'], 2)}+${(1/3)*pow(userSnap.data['pushup'], 1.5)}');
+                                                  FirebaseFirestore.instance.collection('competitions').doc(userSnap.data['competition']).collection('competitors').doc(FirebaseAuth.instance.currentUser.uid).update({
+                                                    'mile': toDouble(mileTime.text),
+                                                    'score': pow(2,(-0.005)*(userSnap.data['mile']-1550))+(1/100)*pow(userSnap.data['crunch'], 2)+(1/3)*pow(userSnap.data['pushup'], 1.5),
+                                                  });
                                                 });
                                                 setVideo(1);
                                               }
@@ -157,11 +165,16 @@ class _TournamentPageState extends State<TournamentPage> {
                                           height: 50,
                                           child: ElevatedButton(
                                             onPressed: () {
-                                              if(mileTime.text.isNotEmpty) {
+                                              if(pushup.text.isNotEmpty) {
                                                 FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser.uid).update({
-                                                  'pushup':toDouble(mileTime.text),
+                                                  'pushup':toInt(pushup.text),
+                                                }).then((value) {
+                                                  FirebaseFirestore.instance.collection('competitions').doc(userSnap.data['competition']).collection('competitors').doc(FirebaseAuth.instance.currentUser.uid).update({
+                                                    'pushup': toInt(pushup.text),
+                                                    'score': pow(2,(-0.005)*(userSnap.data['mile']-1550))+(1/100)*pow(userSnap.data['crunch'], 2)+(1/3)*pow(userSnap.data['pushup'], 1.5),
+                                                  });
                                                 });
-                                                setVideo(2);
+                                                setVideo(1);
                                               }
                                             },
                                             child: Icon(
@@ -195,11 +208,16 @@ class _TournamentPageState extends State<TournamentPage> {
                                           height: 50,
                                           child: ElevatedButton(
                                             onPressed: () {
-                                              if(mileTime.text.isNotEmpty) {
+                                              if(crunches.text.isNotEmpty) {
                                                 FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser.uid).update({
-                                                  'crunch':toDouble(mileTime.text),
+                                                  'crunch':toInt(crunches.text),
+                                                }).then((value) {
+                                                  FirebaseFirestore.instance.collection('competitions').doc(userSnap.data['competition']).collection('competitors').doc(FirebaseAuth.instance.currentUser.uid).update({
+                                                    'crunch': toInt(crunches.text),
+                                                    'score': pow(2,(-0.005)*(userSnap.data['mile']-1550))+(1/100)*pow(userSnap.data['crunch'], 2)+(1/3)*pow(userSnap.data['pushup'], 1.5),
+                                                  });
                                                 });
-                                                setVideo(3);
+                                                setVideo(1);
                                               }
                                             },
                                             child: Icon(
